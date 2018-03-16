@@ -1,0 +1,20 @@
+
+.oompa-header-name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.oompa-header-gender {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 2px 0;
+  color: grey;
+}
+
+.oompa-header-profession {
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  margin: 2px 0;
+  color: grey;
+}

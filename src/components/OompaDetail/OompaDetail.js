@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import OompaHeader from '../commons/OompaHeader';
+import './OompaDetail.css';
 
 class OompaDetail extends React.Component {
   componentDidMount() {
@@ -20,14 +21,12 @@ class OompaDetail extends React.Component {
     } = this.props;
 
     return (
-      <div>
-        <h1>OompaDetail</h1>
-        <div>{oompa.image}</div>
-        <div>{oompa.first_name}</div>
-        <div>{oompa.last_name}</div>
-        <div>{oompa.gender === 'F' ? 'Female' : 'Male'}</div>
-        <div>{oompa.profession}</div>
-        <div>{oompa.description}</div>
+      <div className="oompa-detail">
+        <img src={oompa.image} alt="OompaImage" className="oompa-detail-image" />
+        <div className="oompa-content">
+          <OompaHeader oompa={oompa} />
+          <div className="oompa-detail-description">{oompa.description}</div>
+        </div>
       </div>
     );
   }
