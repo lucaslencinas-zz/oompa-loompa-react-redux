@@ -1,0 +1,10 @@
+.card {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.oompa-card-image {
+  height: 200px;
+  margin-bottom: 15px;
+}
