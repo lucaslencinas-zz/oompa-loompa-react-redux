@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import OompaPropTypes from '../commons/Oompa';
 import OompaHeader from '../commons/OompaHeader';
 import './OompaDetail.css';
 
@@ -38,7 +39,7 @@ class OompaDetail extends React.Component {
 }
 
 OompaDetail.propTypes = {
-  oompa: PropTypes.arrayOf(PropTypes.object).isRequired,
+  oompa: OompaPropTypes,
   urlId: PropTypes.string.isRequired,
   onLoadOompa: PropTypes.func.isRequired
 };

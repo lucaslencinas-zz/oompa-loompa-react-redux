@@ -4,11 +4,14 @@ const initialState = {
   list: [],
   data: {},
   currentPage: 0,
+  hasMoreOompas: false,
   ui: {
     isLoadingOompas: false,
     isLoadingOompa: false
   }
 };
+
+const oompasPerPage = 25;
 
 const buildOompasHashMap = (oompasList) => (
   oompasList.reduce((acum, oompa) => ({
@@ -40,6 +43,7 @@ export default function oompasReducer(state = initialState, action) {
           ...buildOompasHashMap(action.oompas)
         },
         currentPage: action.currentPage,
+        hasMoreOompas: action.oompas.length === oompasPerPage,
         ui: {
           ...state.ui,
           isLoadingOompas: false

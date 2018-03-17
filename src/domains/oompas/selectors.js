@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 export const currentPage = (state) => state.oompas.currentPage;
+export const hasMoreOompas = (state) => state.oompas.hasMoreOompas;
 const oompasKeys = (state) => state.oompas.list;
 const oompasData = (state) => state.oompas.data;
 
