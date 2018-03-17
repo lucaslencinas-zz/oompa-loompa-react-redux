@@ -43,7 +43,7 @@ class InfiniteScroll extends React.Component {
     const { isLoading } = this.state;
     return isLoading ?
       <div className="loading">
-        <span>Loading Oompas</span>
+        <span>Loading Oompas...</span>
       </div> :
       null;
   }
