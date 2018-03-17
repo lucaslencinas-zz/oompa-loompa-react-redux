@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onLoadOompas: actions.fetchOompas,
-}, dispatch)
+  onLoadOompas: actions.fetchOompas
+}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

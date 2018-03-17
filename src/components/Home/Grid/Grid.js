@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from './Card';
 import './Grid.css';
 
@@ -11,5 +12,9 @@ const Grid = ({ oompas = [] }) => (
     ))}
   </div>
 );
+
+Grid.propTypes = {
+  oompas: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default Grid;
