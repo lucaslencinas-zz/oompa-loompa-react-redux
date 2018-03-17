@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './OompaHeader.css';
 
 const OompaHeader = ({ oompa = {} }) => (
@@ -8,5 +9,9 @@ const OompaHeader = ({ oompa = {} }) => (
     <div className="oompa-header-profession">{oompa.profession}</div>
   </div>
 );
+
+OompaHeader.propTypes = {
+  oompa: PropTypes.object.isRequired
+};
 
 export default OompaHeader;

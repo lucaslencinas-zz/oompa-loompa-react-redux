@@ -8,21 +8,19 @@ const initialState = {
     isLoadingOompas: false,
     isLoadingOompa: false
   }
-}
+};
 
-const buildOompasHashMap = (oompasList) => {
-  return oompasList.reduce((acum, oompa) => ({
+const buildOompasHashMap = (oompasList) => (
+  oompasList.reduce((acum, oompa) => ({
     ...acum,
     [oompa.id]: {
       ...oompa,
       isPartial: true
     }
-  }),
-  {});
-}
+  }), {})
+);
 
-export default (state = initialState, action) => {
-
+export default function oompasReducer(state = initialState, action) {
   switch (action.type) {
     case actions.FETCH_OOMPAS_REQUEST:
       return {
@@ -31,7 +29,7 @@ export default (state = initialState, action) => {
           ...state.ui,
           isLoadingOompas: true
         }
-      }
+      };
 
     case actions.FETCH_OOMPAS_SUCCESS:
       return {
@@ -46,7 +44,7 @@ export default (state = initialState, action) => {
           ...state.ui,
           isLoadingOompas: false
         }
-      }
+      };
 
     case actions.FETCH_OOMPA_REQUEST:
       return {
@@ -55,7 +53,7 @@ export default (state = initialState, action) => {
           ...state.ui,
           isLoadingOompa: true
         }
-      }
+      };
 
     case actions.FETCH_OOMPA_SUCCESS:
       return {
@@ -68,9 +66,9 @@ export default (state = initialState, action) => {
           ...state.ui,
           isLoadingOompa: false
         }
-      }
+      };
 
     default:
-      return state
+      return state;
   }
 }

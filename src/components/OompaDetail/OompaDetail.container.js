@@ -9,7 +9,7 @@ const mapStateToProps = (state, { match }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  onLoadOompa: actions.fetchOompa,
-}, dispatch)
+  onLoadOompa: actions.fetchOompa
+}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(OompaDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(OompaDetail);

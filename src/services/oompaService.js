@@ -5,7 +5,6 @@ const serviceUri = {
   host: '2q2woep105.execute-api.eu-west-1.amazonaws.com'
 };
 
-
 export function list({ page }) {
   const url = format({
     ...serviceUri,
