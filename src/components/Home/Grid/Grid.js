@@ -5,7 +5,7 @@ import InfiniteScroll from '../../InfiniteScroll';
 import Card from './Card';
 import './Grid.css';
 
-const Grid = ({ oompas, hasMoreOompas, onLoadOompas, isFiltering }) => (
+const Grid = ({ oompas = [], hasMoreOompas, onLoadOompas, isFiltering }) => (
   <InfiniteScroll
     hasMore={hasMoreOompas}
     onLoadMore={onLoadOompas}
