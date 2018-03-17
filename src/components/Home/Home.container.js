@@ -4,7 +4,8 @@ import { actions, selectors } from '../../domains';
 import Home from './Home';
 
 const mapStateToProps = (state) => ({
-  oompas: selectors.oompas(state)
+  oompas: selectors.oompas(state),
+  hasMoreOompas: selectors.hasMoreOompas(state)
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
