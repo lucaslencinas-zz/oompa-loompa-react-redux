@@ -31,7 +31,10 @@ class OompaDetail extends React.Component {
         />
         <div className="oompa-content">
           <OompaHeader oompa={oompa} />
-          <div className="oompa-detail-description">{oompa.description}</div>
+          <div
+            className="oompa-detail-description"
+            dangerouslySetInnerHTML={{ __html: oompa.description }}
+          />
         </div>
       </div>
     );

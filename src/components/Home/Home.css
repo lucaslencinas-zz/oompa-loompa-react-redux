@@ -1,3 +1,30 @@
-.home {
-  padding: 0 10%;
+
+@media (max-width: 479px) {
+  .home {
+    padding: 0 50px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 991px) {
+  .home {
+    padding: 0 100px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .home {
+    padding: 0 200px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .home {
+    padding: 0 200px;
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 2299px) {
+  .home {
+    padding: 0 250px;
+  }
 }
