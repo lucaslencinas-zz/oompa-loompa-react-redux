@@ -6,6 +6,7 @@ import './OompaDetail.css';
 
 class OompaDetail extends React.Component {
   componentDidMount() {
+    console.log('algo')
     const {
       oompa = {},
       urlId = '',
