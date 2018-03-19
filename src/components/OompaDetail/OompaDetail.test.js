@@ -1,15 +1,93 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { shallow, mount } from 'enzyme';
 import OompaDetail from './OompaDetail';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<OompaDetail onLoadOompa={() => null} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('OompaDetail', () => {
+  let oompaDetail;
+  let urlId;
+  let onLoadOompa;
+
+  describe('When shallowing', () => {
+    beforeEach(() => {
+      urlId = '5';
+      onLoadOompa = sinon.spy();
+      oompaDetail = shallow((
+        <OompaDetail
+          onLoadOompa={onLoadOompa}
+          urlId={urlId}
+          oompa={oompa}
+        />
+      ));
+    });
+
+    it('Renders the elements and tags correctly', () => {
+      const img = oompaDetail.find('img');
+      const oompaHeader = oompaDetail.find('OompaHeader');
+      const description = oompaDetail.find('[className="oompa-detail-description"]');
+      expect(img.prop('src')).to.equal(oompa.image);
+      expect(oompaHeader.prop('oompa')).to.equal(oompa);
+      expect(description.prop('dangerouslySetInnerHTML')).to.eql({ __html: oompa.description });
+    });
+  });
+
+  describe('When mounting with no oompa', () => {
+    beforeEach(() => {
+      urlId = '5';
+      onLoadOompa = sinon.spy();
+      oompaDetail = mount((
+        <OompaDetail
+          onLoadOompa={onLoadOompa}
+          urlId={urlId}
+        />
+      ));
+    });
+
+    it('Calls onLoadOompa to get the oompa', () => {
+      expect(onLoadOompa.calledWith('5')).to.equal(true);
+    });
+  });
+
+  describe('When mounting with partial oompa', () => {
+    beforeEach(() => {
+      urlId = '5';
+      onLoadOompa = sinon.spy();
+      oompaDetail = mount((
+        <OompaDetail
+          onLoadOompa={onLoadOompa}
+          urlId={urlId}
+          oompa={{ ...oompa, isPartial: true }}
+        />
+      ));
+    });
+
+    it('No need to call onLoadOompa', () => {
+      expect(onLoadOompa.calledWith('5')).to.equal(true);
+    });
+  });
+
+  describe('When mounting with full oompa', () => {
+    beforeEach(() => {
+      urlId = '5';
+      onLoadOompa = sinon.spy();
+      oompaDetail = mount((
+        <OompaDetail
+          onLoadOompa={onLoadOompa}
+          urlId={urlId}
+          oompa={oompa}
+        />
+      ));
+    });
+
+    it('No need to call onLoadOompa', () => {
+      expect(onLoadOompa.called).to.equal(false);
+    });
+  });
 });
 
-// eslint-disable-next-line
 const oompa = {
+  id: '5',
   last_name: 'Kenealy',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
   image: 'https://s3.eu-central-1.amazonaws.com/napptilus/level-test/7.jpg',

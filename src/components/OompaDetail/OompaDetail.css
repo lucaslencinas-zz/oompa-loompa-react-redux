@@ -12,6 +12,19 @@
   line-height: 30px;
 }
 
+.loading-detail {
+  text-align: center;
+  flex: 1;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.loading-detail-description {
+  font-style: italic;
+  font-size: 20px;
+  margin-top: 30px;
+}
+
 /* -=-=-=-= oompa-detail-image media queries -==-=-=-= */
 @media (max-width: 479px) {
   .oompa-detail-image {

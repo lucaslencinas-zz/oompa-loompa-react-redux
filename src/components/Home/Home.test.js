@@ -1,18 +1,113 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
+import { expect } from 'chai';
+import sinon from 'sinon';
+import { shallow, mount } from 'enzyme';
 import Home from './Home';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<Home onLoadOompas={() => null} />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Home', () => {
+  let home;
+  let onLoadOompas;
+
+  describe('When shallowing', () => {
+    beforeEach(() => {
+      onLoadOompas = sinon.spy();
+      home = shallow((
+        <Home
+          onLoadOompas={onLoadOompas}
+          hasMoreOompas
+          oompas={oompas}
+        />
+      ));
+    });
+
+    it('Renders the elements and tags correctly', () => {
+      const search = home.find('Search');
+      const grid = home.find('Grid');
+      expect(search.exists()).to.equal(true);
+      expect(grid.prop('oompas')).to.equal(oompas);
+      expect(grid.prop('hasMoreOompas')).to.equal(true);
+      expect(grid.prop('onLoadOompas')).to.equal(onLoadOompas);
+      expect(grid.prop('isFiltering')).to.equal(false);
+    });
+
+    describe('When changing props', () => {
+      beforeEach(() => {
+        home.setProps({ oompas: [oompas[0]] });
+      });
+
+      it('set the new oompas in the state', () => {
+        expect(home.state('oompas')).to.eql([oompas[0]]);
+      });
+    });
+
+    describe('When the search calls the handleChange function', () => {
+      beforeEach(() => {
+        home.find('Search').prop('handleChange')('mar kar');
+      });
+
+      it('filters the oompas in the state according to the new serchTerm', () => {
+        expect(home.state('oompas')).to.eql([oompas[0]]);
+      });
+    });
+  });
+
+  describe('When mounting with no oompas', () => {
+    beforeEach(() => {
+      onLoadOompas = sinon.spy();
+      home = mount(
+        <Router>
+          <Home
+            onLoadOompas={onLoadOompas}
+            hasMoreOompas
+            oompas={[]}
+          />
+        </Router>
+      );
+    });
+
+    it('Renders the elements and tags correctly', () => {
+      const search = home.find('Search');
+      const grid = home.find('Grid');
+      expect(search.exists()).to.equal(true);
+      expect(grid.prop('oompas')).to.eql([]);
+      expect(grid.prop('hasMoreOompas')).to.equal(true);
+      expect(grid.prop('onLoadOompas')).to.equal(onLoadOompas);
+      expect(grid.prop('isFiltering')).to.equal(false);
+    });
+
+    it('Calls onLoadOompas to get the oompas', () => {
+      expect(onLoadOompas.called).to.equal(true);
+    });
+  });
+
+  describe('When mounting with oompas', () => {
+    beforeEach(() => {
+      onLoadOompas = sinon.spy();
+      home = mount(
+        <Router>
+          <Home
+            onLoadOompas={onLoadOompas}
+            hasMoreOompas
+            oompas={oompas}
+          />
+        </Router>
+      );
+    });
+
+    it('No need to call onLoadOompas', () => {
+      expect(onLoadOompas.called).to.equal(false);
+    });
+  });
 });
-// eslint-disable-next-line
+
 const oompas = [
   {
     first_name: 'Marcy',
     last_name: 'Karadzas',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -29,6 +124,8 @@ const oompas = [
     first_name: 'Evangelia',
     last_name: 'Cowin',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'cocoa nuts'
     },
@@ -45,6 +142,8 @@ const oompas = [
     first_name: 'Nesta',
     last_name: 'Pidgley',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'Chocolat'
     },
@@ -61,6 +160,8 @@ const oompas = [
     first_name: 'Stearne',
     last_name: 'Nunan',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -77,6 +178,8 @@ const oompas = [
     first_name: 'Cassius',
     last_name: 'Twamley',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -93,6 +196,8 @@ const oompas = [
     first_name: 'Corenda',
     last_name: 'Diggles',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -109,6 +214,8 @@ const oompas = [
     first_name: 'Jarrad',
     last_name: 'Jaquiss',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -125,6 +232,8 @@ const oompas = [
     first_name: 'Kelsy',
     last_name: 'Paramor',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -141,6 +250,8 @@ const oompas = [
     first_name: 'Jesselyn',
     last_name: 'Flasby',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'Chocolat'
     },
@@ -157,6 +268,8 @@ const oompas = [
     first_name: 'Georgiana',
     last_name: 'Pauel',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'cocoa nuts'
     },
@@ -173,6 +286,8 @@ const oompas = [
     first_name: 'Alejandra',
     last_name: 'Teideman',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -189,6 +304,8 @@ const oompas = [
     first_name: 'Alexis',
     last_name: 'Inder',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -205,6 +322,8 @@ const oompas = [
     first_name: 'Ricard',
     last_name: 'Reeman',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -221,6 +340,8 @@ const oompas = [
     first_name: 'Catlee',
     last_name: 'Annear',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'cocoa nuts'
     },
@@ -237,6 +358,8 @@ const oompas = [
     first_name: 'Fleming',
     last_name: 'Pouck',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'Chocolat'
     },
@@ -253,6 +376,8 @@ const oompas = [
     first_name: 'Jarid',
     last_name: 'Bunner',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -269,6 +394,8 @@ const oompas = [
     first_name: 'Karry',
     last_name: 'Hethron',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -285,6 +412,8 @@ const oompas = [
     first_name: 'Renell',
     last_name: 'Byrcher',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -301,6 +430,8 @@ const oompas = [
     first_name: 'Patsy',
     last_name: 'Pergens',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -317,6 +448,8 @@ const oompas = [
     first_name: 'Paulie',
     last_name: 'Ayree',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -333,6 +466,8 @@ const oompas = [
     first_name: 'Todd',
     last_name: 'Lavalle',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'Chocolat'
     },
@@ -349,6 +484,8 @@ const oompas = [
     first_name: 'Carlie',
     last_name: 'Stainton',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'cocoa nuts'
     },
@@ -365,6 +502,8 @@ const oompas = [
     first_name: 'Dulcinea',
     last_name: 'Gomme',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
@@ -381,6 +520,8 @@ const oompas = [
     first_name: 'Cherry',
     last_name: 'Duesbury',
     favorite: {
+      song: '123',
+      random_string: 'blue',
       color: 'blue',
       food: 'cocoa nuts'
     },
@@ -397,6 +538,8 @@ const oompas = [
     first_name: 'Shepard',
     last_name: 'Kenealy',
     favorite: {
+      song: '123',
+      random_string: 'red',
       color: 'red',
       food: 'Chocolat'
     },
