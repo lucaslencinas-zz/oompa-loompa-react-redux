@@ -31,8 +31,10 @@ npm test -- --coverage
 - Storing the oompa on the **localStorage** for a day
 - **InfiniteScroll** on the Home page
 - **Not scaped HTML** content for the Oompa description.
-- **Tests** in almost all the components and other files.
+- **Tests** in almost all the components and other files. Using Enzyme, sinon and chai.
 - **Responsive**. It adapt to all window screen sizes. Even on a cellphone.
+- **eslint configuration**.
+- **Travis CI**.
 - Some little **CSS animations** on hover.
 - Renders the Oompa Detail page with the content that was retrieved for the Home list, and then request for the Oompa description.
 - Loading messages when the request in being made.
