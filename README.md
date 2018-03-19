@@ -1,4 +1,4 @@
-# Oompa Loompa's Crew in React + Redux
+# Oompa Loompa's Crew in React + Redux  [![Build Status](https://travis-ci.org/lucaslencinas/oompa-loompa-react-redux.svg?branch=master)](https://travis-ci.org/lucaslencinas/oompa-loompa-react-redux)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
