@@ -18,7 +18,6 @@ export function fetchOompas() {
   return (dispatch, getState) => {
     const state = getState();
     const nextPage = selectors.currentPage(state) + 1;
-    dispatch({ type: actions.FETCH_OOMPAS_REQUEST });
 
     return getOompas({ page: nextPage })
       .then(({ current, results }) => (
@@ -32,15 +31,11 @@ export function fetchOompas() {
 }
 
 export function fetchOompa(id) {
-  return (dispatch) => {
-    dispatch({ type: actions.FETCH_OOMPA_REQUEST });
-
-    return getOompa({ id })
-      .then((oompa) => (
-        dispatch({
-          type: actions.FETCH_OOMPA_SUCCESS,
-          oompa: { ...oompa, id }
-        })
-      ));
-  };
+  return (dispatch) => getOompa({ id })
+    .then((oompa) => (
+      dispatch({
+        type: actions.FETCH_OOMPA_SUCCESS,
+        oompa: { ...oompa, id }
+      })
+    ));
 }

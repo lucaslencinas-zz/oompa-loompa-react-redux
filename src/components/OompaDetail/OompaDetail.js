@@ -18,9 +18,20 @@ class OompaDetail extends React.Component {
   }
 
   render() {
-    const {
-      oompa = {}
-    } = this.props;
+    const { oompa = {} } = this.props;
+    if (!oompa.id) {
+      return (
+        <div className="oompa-detail">
+          <div className="loading-detail">Loading Oompa</div>
+        </div>);
+    }
+
+    const description = oompa.isPartial ?
+      (<div className="loading-detail-description">Loading Oompa</div>) :
+      (<div
+        className="oompa-detail-description"
+        dangerouslySetInnerHTML={{ __html: oompa.description }}
+      />);
 
     return (
       <div className="oompa-detail">
@@ -31,10 +42,7 @@ class OompaDetail extends React.Component {
         />
         <div className="oompa-content">
           <OompaHeader oompa={oompa} />
-          <div
-            className="oompa-detail-description"
-            dangerouslySetInnerHTML={{ __html: oompa.description }}
-          />
+          {description}
         </div>
       </div>
     );
